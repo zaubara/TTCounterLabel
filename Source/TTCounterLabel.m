@@ -56,17 +56,19 @@
 #pragma mark - Setters
 
 - (void)setValue:(unsigned long long)value {
-    
     if (value < ULONG_LONG_MAX) {
         _value = value;
         self.currentValue = _value;
         [self updateDisplay];
+    } else {
+        // The value is negative, or too large
+        NSLog(@"Invalid value: value of %llu is invalid, either negative or too large", value);
+        
+        NSLog(@"Setting value to the max value of ULONG_LONG_MAX - 1");
+        _value = (ULONG_LONG_MAX - 1);
+        self.currentValue = _value;
+//        [self updateDisplay];
     }
-    
-    //No need to check for greater than ULONG_LONG_MAX due to the fact that the largest number a user can enter is
-    //99h59m59s = 360000000, ULONG_LONG_MAX is 18446744073709551615 (depends on library and system) and also this number should not be shown
-    
-    //Checking with negative numbers is also unnecessary due to the fact that value is passed unsigned
 }
 
 - (void)setStartValue:(unsigned long long)startValue {
@@ -169,14 +171,20 @@
     unsigned long long milliSecs = (unsigned long long)(elapsedTime * 1000);
     
     if (self.countDirection == kCountDirectionDown) {
-        //Only setValue if the value passed is a positive number or 0
-        //Trying to pass negative value from subtracting two unsigned variables causes max unsigned long long to be passed
-        if (_startValue >= milliSecs) {
-            [self setValue:(_startValue - milliSecs)];
-        }
+        [self setValue:(_startValue - milliSecs)];
     } else {
         [self setValue:(_startValue + milliSecs)];
     }
+    
+    //
+    static long secondsValue = 0;
+    if (secondsValue != self.currentValue/1000) {
+        secondsValue = self.currentValue/1000;
+        if (self.countdownDelegate && [self.countdownDelegate respondsToSelector:@selector(secondsRemainingForCountdown:)]) {
+            [self.countdownDelegate secondsRemainingForCountdown:secondsValue];
+        }
+    }
+    //NSLog(@"started at:%f current:%llu",self.startTime,self.currentValue/1000);
 }
 
 - (NSString *)timeFormattedStringForValue:(unsigned long long)value {
@@ -240,7 +248,6 @@
 }
 
 - (void)updateApperance {
-    self.maximumLineHeight = self.regularFont.pointSize;
     [self setValue:_currentValue];
 }
 
