@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, kTTCounter){
     IBOutlet UIButton *_startStopButton;
     IBOutlet UIButton *_resetButton;
 }
+@property (weak, nonatomic) IBOutlet UIStackView *stackV;
 
 @end
 
@@ -36,22 +37,18 @@ struct kevin {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
     _counterLabel.countdownDidEndForSourceBlock = ^(TTCounterLabel *label){
       
         NSLog(@"didendwithvalue:\t%@",label);
     };
     
-    _counterLabel.secondsRemainingForCountdown = ^(long seconds){
+    _counterLabel.secondsRemainingForCountdown = ^(NSNumber *seconds){
         
-        NSLog(@"didendwit %ld ",seconds);
+        NSLog(@"didendwit %@ ",seconds);
         
     };
     
-//    ^(BOOL dataUpdated)
-//    {[self carViewDone:dataUpdated];};
-    //^(NSMutableDictionary *pickerData)
     /*
      // Uncomment this code to use the label as a count down timer
      self.counterLabel.countDirection = kCountDirectionDown;

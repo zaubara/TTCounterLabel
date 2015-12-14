@@ -168,8 +168,8 @@
 }
 
 - (void)clockDidTick:(NSTimer *)timer {
-    double currentTime = CFAbsoluteTimeGetCurrent();
     
+    double currentTime = CFAbsoluteTimeGetCurrent();
     double elapsedTime = currentTime - self.startTime;
     
     // Convert the double to milliseconds
@@ -181,14 +181,16 @@
         [self setValue:(_startValue + milliSecs)];
     }
     
-    //
     static long secondsValue = 0;
+    
     if (secondsValue != self.currentValue/1000) {
+        
         secondsValue = self.currentValue/1000;
         
         if (self.secondsRemainingForCountdown) {
             
-            self.secondsRemainingForCountdown(secondsValue);
+            self.secondsRemainingForCountdown(@(secondsValue));
+            
         }
         
         if (self.countdownDelegate && [self.countdownDelegate respondsToSelector:@selector(secondsRemainingForCountdown:)]) {

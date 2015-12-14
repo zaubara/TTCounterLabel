@@ -3,12 +3,13 @@
     <dependencies>
         <deployment version="2336" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="bka-el-xw7">
             <objects>
-                <viewController id="Emk-M9-qlJ" customClass="ViewController" sceneMemberID="viewController">
+                <viewController autoresizesArchivedViewToFullSize="NO" id="Emk-M9-qlJ" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FQb-aN-eFe"/>
                         <viewControllerLayoutGuide type="bottom" id="fGR-ee-yjM"/>
@@ -17,44 +18,82 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fh6-tQ-nyF">
-                                <rect key="frame" x="20" y="250" width="280" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Start">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="startStopTapped:" destination="Emk-M9-qlJ" eventType="touchUpInside" id="A5R-PC-mv9"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVQ-ij-KEs" customClass="TTCounterLabel">
-                                <rect key="frame" x="20" y="20" width="280" height="175"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uhJ-89-Lat">
-                                <rect key="frame" x="20" y="288" width="280" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Reset">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="resetTapped:" destination="Emk-M9-qlJ" eventType="touchUpInside" id="Rc7-0h-gbA"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VR0-Yi-vAJ">
+                                <rect key="frame" x="20" y="20" width="560" height="580"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVQ-ij-KEs" customClass="TTCounterLabel">
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="536"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xGr-zU-UXy">
+                                        <rect key="frame" x="0.0" y="546" width="560" height="34"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fh6-tQ-nyF">
+                                                <rect key="frame" x="0.0" y="0.0" width="276" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="110" id="5O3-gf-c2B"/>
+                                                    <constraint firstAttribute="height" constant="34" id="6Xr-Ah-mk5"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="Start">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="5O3-gf-c2B"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="startStopTapped:" destination="Emk-M9-qlJ" eventType="touchUpInside" id="A5R-PC-mv9"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VaN-cU-I73">
+                                                <rect key="frame" x="284" y="0.0" width="276" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34" id="LLo-rz-HXc"/>
+                                                    <constraint firstAttribute="width" constant="110" id="Zua-6G-6vR"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="Reset">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="Zua-6G-6vR"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="startStopTapped:" destination="Emk-M9-qlJ" eventType="touchUpInside" id="y36-3K-knh"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="xGr-zU-UXy" firstAttribute="leading" secondItem="VR0-Yi-vAJ" secondAttribute="leading" id="F6H-iJ-C74"/>
+                                    <constraint firstAttribute="trailing" secondItem="xGr-zU-UXy" secondAttribute="trailing" id="qHl-vw-ArR"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VR0-Yi-vAJ" firstAttribute="leading" secondItem="heI-Jg-sRd" secondAttribute="leadingMargin" id="2J5-i0-C17"/>
+                            <constraint firstItem="VR0-Yi-vAJ" firstAttribute="top" secondItem="FQb-aN-eFe" secondAttribute="bottom" id="2nw-Uv-LfP"/>
+                            <constraint firstItem="fGR-ee-yjM" firstAttribute="top" secondItem="VR0-Yi-vAJ" secondAttribute="bottom" id="g30-qK-M0s"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VR0-Yi-vAJ" secondAttribute="trailing" id="kK6-f3-UQb"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="_counterLabel" destination="vVQ-ij-KEs" id="rrq-fw-hsn"/>
-                        <outlet property="_resetButton" destination="uhJ-89-Lat" id="4dK-fh-bJo"/>
+                        <outlet property="_resetButton" destination="VaN-cU-I73" id="0MZ-hD-sQH"/>
                         <outlet property="_startStopButton" destination="Fh6-tQ-nyF" id="mg0-84-HNT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cb0-pN-CHH" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="675" y="409.33098591549293"/>
+            <point key="canvasLocation" x="675" y="409"/>
         </scene>
     </scenes>
 </document>

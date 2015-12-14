@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, kDisplayMode) {
 /**
  *  Block to receives seconds remaining for the timer.
  */
-@property (nonatomic, copy) void (^secondsRemainingForCountdown)(long secondsToZero);
+@property (nonatomic, copy) void (^secondsRemainingForCountdown)(NSNumber *secondsToZero);
 
 /**
  *  Block to check whether the timer is running.
