@@ -26,6 +26,8 @@ typedef NS_ENUM(NSInteger, kDisplayMode) {
 @optional
 - (void)countdownDidEndForSource:(TTCounterLabel *)source;
 - (void)secondsRemainingForCountdown:(long)secondsToZero;
+
+
 @end
 
 #pragma mark - TTCounterLabel
@@ -40,6 +42,25 @@ typedef NS_ENUM(NSInteger, kDisplayMode) {
 @property (strong, nonatomic) UIFont *regularFont;
 @property (assign, nonatomic) BOOL isRunning;
 @property (assign, nonatomic) kDisplayMode displayMode;
+
+#pragma mark - Block support -
+// KJM
+
+/**
+ *  Block called when the countdown timer ends.
+ */
+@property (nonatomic, copy) void (^countdownDidEndForSourceBlock)(TTCounterLabel *source);
+
+/**
+ *  Block to receives seconds remaining for the timer.
+ */
+@property (nonatomic, copy) void (^secondsRemainingForCountdown)(long secondsToZero);
+
+/**
+ *  Block to check whether the timer is running.
+ */
+@property (copy, nonatomic) void (^isRunningBlock)(BOOL isRunning);
+
 
 #pragma mark - Public
 

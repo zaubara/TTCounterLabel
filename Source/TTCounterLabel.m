@@ -96,6 +96,11 @@
         [self stop];
         self.valueString = self.displayMode == kDisplayModeFull ? @"00s.00" : @"00s";
         
+        if (self.countdownDidEndForSourceBlock) {
+            
+            [self performSelector:@selector(countdownDidEndForSource:) withObject:self];
+        }
+        
         // Inform any delegates
         if (self.countdownDelegate && [self.countdownDelegate respondsToSelector:@selector(countdownDidEndForSource:)]) {
             [self.countdownDelegate performSelector:@selector(countdownDidEndForSource:) withObject:self];
@@ -180,6 +185,12 @@
     static long secondsValue = 0;
     if (secondsValue != self.currentValue/1000) {
         secondsValue = self.currentValue/1000;
+        
+        if (self.secondsRemainingForCountdown) {
+            
+            self.secondsRemainingForCountdown(secondsValue);
+        }
+        
         if (self.countdownDelegate && [self.countdownDelegate respondsToSelector:@selector(secondsRemainingForCountdown:)]) {
             [self.countdownDelegate secondsRemainingForCountdown:secondsValue];
         }
@@ -221,6 +232,11 @@
     self.running = YES;
     self.isRunning = self.running;
     
+    if (self.isRunningBlock) {
+        
+        self.isRunningBlock(self.running);
+    }
+    
     self.clockTimer = [NSTimer timerWithTimeInterval:0.02
                                               target:self
                                             selector:@selector(clockDidTick:)
@@ -229,6 +245,7 @@
 }
 
 - (void)stop {
+    
     if (self.clockTimer) {
         [self.clockTimer invalidate];
         self.clockTimer = nil;
@@ -238,9 +255,16 @@
     
     self.running = NO;
     self.isRunning = self.running;
+    
+    if (self.isRunningBlock) {
+        
+        self.isRunningBlock(self.running);
+    }
+
 }
 
 - (void)reset {
+    
     [self stop];
     
     self.startValue = self.resetValue;

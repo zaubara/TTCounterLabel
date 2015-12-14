@@ -29,10 +29,29 @@ typedef NS_ENUM(NSInteger, kTTCounter){
 
 #pragma mark - Lifecycle
 
+struct kevin {
+
+    int month; int day; int year;
+};
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    _counterLabel.countdownDidEndForSourceBlock = ^(TTCounterLabel *label){
+      
+        NSLog(@"didendwithvalue:\t%@",label);
+    };
+    
+    _counterLabel.secondsRemainingForCountdown = ^(long seconds){
+        
+        NSLog(@"didendwit %ld ",seconds);
+        
+    };
+    
+//    ^(BOOL dataUpdated)
+//    {[self carViewDone:dataUpdated];};
+    //^(NSMutableDictionary *pickerData)
     /*
      // Uncomment this code to use the label as a count down timer
      self.counterLabel.countDirection = kCountDirectionDown;
