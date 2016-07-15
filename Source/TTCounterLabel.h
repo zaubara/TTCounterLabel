@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Triggertrap. All rights reserved.
 //
 
-#import "TTTAttributedLabel.h"
+@import TTTAttributedLabel;
 
 typedef NS_ENUM(NSInteger, kCountDirection){
     kCountDirectionUp = 0,
